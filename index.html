@@ -323,6 +323,24 @@
     border-color: var(--color-brass);
     color: var(--color-ivory);
   }
+  .shuffle-btn.shaking{
+    animation: shakeBtn 0.5s ease;
+  }
+  @keyframes shakeBtn{
+    0%   { transform: rotate(0deg) translateX(0); }
+    10%  { transform: rotate(-8deg) translateX(-2px); }
+    20%  { transform: rotate(7deg) translateX(2px); }
+    30%  { transform: rotate(-6deg) translateX(-2px); }
+    40%  { transform: rotate(5deg) translateX(2px); }
+    50%  { transform: rotate(-4deg) translateX(-1px); }
+    60%  { transform: rotate(3deg) translateX(1px); }
+    70%  { transform: rotate(-2deg) translateX(0); }
+    80%  { transform: rotate(1deg); }
+    100% { transform: rotate(0deg) translateX(0); }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .shuffle-btn.shaking{ animation: none; }
+  }
 
   .fade-swap{
     animation: fadeSwap 0.35s ease;
@@ -789,8 +807,16 @@
       renderWildcardRecipes();
     }
 
+    function triggerShuffle(){
+      var btn = document.getElementById('shuffle-btn');
+      btn.classList.remove('shaking');
+      void btn.offsetWidth;
+      btn.classList.add('shaking');
+      shuffleAll();
+    }
+
     document.addEventListener('DOMContentLoaded', shuffleAll);
-    document.getElementById('shuffle-btn').addEventListener('click', shuffleAll);
+    document.getElementById('shuffle-btn').addEventListener('click', triggerShuffle);
   })();
 </script>
 
