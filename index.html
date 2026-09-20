@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Proof &amp; Measure — A Field Guide to the Bar</title>
+<meta name="description" content="Bartending facts, technique, and a menu of classic cocktail recipes.">
+<meta name="theme-color" content="#17120F">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍸</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+
+  :root{
+    --color-bg: #17120F;
+    --color-bg-panel: #1E1712;
+    --color-rule: #4A3B2D;
+    --color-rule-soft: #2E251C;
+    --color-brass: #C6A662;
+    --color-brass-dim: #8F764A;
+    --color-garnet: #9A3A3A;
+    --color-ivory: #EDE6D6;
+    --color-muted: #A99B87;
+
+    --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+    --space-1: 0.5rem;
+    --space-2: 1rem;
+    --space-3: 1.75rem;
+    --space-4: 3rem;
+    --space-5: 5rem;
+    --space-6: 7.5rem;
+
+    --container: 760px;
+  }
+
+  *, *::before, *::after{ box-sizing: border-box; }
+
+  html{ scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior: auto; }
+    *{ animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  }
+
+  body{
+    margin: 0;
+    background: var(--color-bg);
+    color: var(--color-ivory);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a{ color: var(--color-brass); }
+  a:focus-visible, button:focus-visible{
+    outline: 1px solid var(--color-brass);
+    outline-offset: 3px;
+  }
+
+  .container{
+    max-width: var(--container);
+    margin: 0 auto;
+    padding-inline: 1.25rem;
+  }
+
+  .rule{
+    border: none;
+    border-top: 1px solid var(--color-rule);
+    margin: 0;
+  }
+
+  /* ---------- Header ---------- */
+
+  .site-head{
+    padding: var(--space-2) 0;
+    border-bottom: 1px solid var(--color-rule-soft);
+  }
+  .site-head .container{
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-2);
+    flex-wrap: wrap;
+  }
+  .brand{
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    letter-spacing: 0.02em;
+    color: var(--color-ivory);
+    text-decoration: none;
+  }
+  .site-nav{
+    display: flex;
+    gap: var(--space-3);
+  }
+  .site-nav a{
+    color: var(--color-muted);
+    text-decoration: none;
+    font-size: 0.9rem;
+  }
+  .site-nav a:hover{ color: var(--color-brass); }
+
+  /* ---------- Hero ---------- */
+
+  .hero{
+    padding: var(--space-6) 0 var(--space-5);
+    text-align: center;
+    opacity: 0;
+    animation: rise 0.9s ease-out 0.1s forwards;
+  }
+  @keyframes rise{
+    from{ opacity: 0; transform: translateY(10px); }
+    to{ opacity: 1; transform: translateY(0); }
+  }
+  .hero-glass{
+    width: 76px;
+    height: auto;
+    margin: 0 auto var(--space-3);
+    display: block;
+  }
+  .hero h1{
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: clamp(2.4rem, 6vw, 3.6rem);
+    line-height: 1.05;
+    margin: 0 0 var(--space-2);
+    color: var(--color-ivory);
+  }
+  .hero p{
+    font-size: 1.05rem;
+    color: var(--color-muted);
+    max-width: 34rem;
+    margin: 0 auto;
+  }
+
+  /* ---------- Section headers ---------- */
+
+  section{ padding: var(--space-5) 0; }
+  section + section{ border-top: 1px solid var(--color-rule-soft); }
+
+  .section-head{
+    margin-bottom: var(--space-4);
+  }
+  .section-head h2{
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 2rem;
+    margin: 0 0 var(--space-1);
+    color: var(--color-ivory);
+  }
+  .section-head p{
+    color: var(--color-muted);
+    max-width: 38rem;
+    margin: 0;
+  }
+
+  /* ---------- Facts ledger ---------- */
+
+  .fact-ledger{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .fact-ledger li{
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-1);
+    padding: 1.1rem 0;
+    border-top: 1px solid var(--color-rule-soft);
+  }
+  .fact-ledger li:last-child{
+    border-bottom: 1px solid var(--color-rule-soft);
+  }
+  .fact-title{
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    color: var(--color-brass);
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+  .fact-leader{
+    flex: 1;
+    border-bottom: 1px dotted var(--color-rule);
+    height: 0.5em;
+    min-width: 1rem;
+  }
+  .fact-note{
+    color: var(--color-muted);
+    font-size: 0.92rem;
+    max-width: 22rem;
+    text-align: right;
+  }
+
+  @media (max-width: 620px){
+    .fact-ledger li{
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.35rem;
+    }
+    .fact-leader{ display: none; }
+    .fact-note{ text-align: left; max-width: none; }
+  }
+
+  /* ---------- Menu / recipes ---------- */
+
+  .category{ margin-bottom: var(--space-4); }
+  .category:last-child{ margin-bottom: 0; }
+  .category h3{
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 1.2rem;
+    color: var(--color-brass-dim);
+    margin: 0 0 var(--space-2);
+  }
+
+  .recipe{
+    padding: var(--space-3) 0;
+    border-top: 1px solid var(--color-rule-soft);
+  }
+  .recipe:last-child{
+    border-bottom: 1px solid var(--color-rule-soft);
+  }
+
+  .recipe-head{
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: var(--space-2);
+    margin-bottom: var(--space-1);
+  }
+  .recipe-head h4{
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 1.4rem;
+    margin: 0;
+    color: var(--color-ivory);
+  }
+  .recipe-glass{
+    font-size: 0.85rem;
+    color: var(--color-muted);
+    white-space: nowrap;
+    margin: 0;
+  }
+  .recipe-desc{
+    color: var(--color-muted);
+    margin: 0 0 var(--space-2);
+    max-width: 42rem;
+  }
+
+  .recipe-body{
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: var(--space-3);
+    margin-top: var(--space-2);
+  }
+  @media (max-width: 620px){
+    .recipe-body{ grid-template-columns: 1fr; }
+  }
+
+  .col-label{
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--color-brass);
+    margin: 0 0 0.5rem;
+    font-size: 0.95rem;
+  }
+
+  .ingredients ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .ingredients li{
+    padding: 0.3rem 0;
+    font-size: 0.95rem;
+  }
+
+  .method ol{
+    margin: 0;
+    padding-left: 1.1rem;
+  }
+  .method li{
+    padding: 0.25rem 0;
+    font-size: 0.95rem;
+  }
+  .method li::marker{
+    color: var(--color-brass-dim);
+  }
+
+  /* ---------- Footer ---------- */
+
+  footer{
+    padding: var(--space-4) 0 var(--space-5);
+  }
+  footer .container{
+    text-align: center;
+  }
+  footer p{
+    color: var(--color-muted);
+    font-size: 0.85rem;
+    margin: 0.3rem 0;
+  }
+
+</style>
+</head>
+<body>
+
+<header class="site-head">
+  <div class="container">
+    <a class="brand" href="#top">Proof &amp; Measure</a>
+    <nav class="site-nav">
+      <a href="#facts">On the Bar</a>
+      <a href="#menu">The Menu</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section class="hero" id="top">
+    <div class="container">
+      <svg class="hero-glass" viewBox="0 0 120 140" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M20 12 L60 70 L100 12" stroke="#C6A662" stroke-width="2" stroke-linejoin="round"/>
+        <path d="M14 12 H106" stroke="#C6A662" stroke-width="2" stroke-linecap="round"/>
+        <line x1="60" y1="70" x2="60" y2="118" stroke="#C6A662" stroke-width="2"/>
+        <line x1="32" y1="128" x2="88" y2="128" stroke="#C6A662" stroke-width="2" stroke-linecap="round"/>
+        <line x1="60" y1="118" x2="60" y2="128" stroke="#C6A662" stroke-width="2"/>
+        <path d="M40 30 Q60 44 80 30" stroke="#9A3A3A" stroke-width="2" fill="none" stroke-linecap="round"/>
+      </svg>
+      <h1>A field guide to the bar</h1>
+      <p>Facts worth knowing before your next round, and a short menu of drinks worth making well.</p>
+    </div>
+  </section>
+
+  <section id="facts">
+    <div class="container">
+      <div class="section-head">
+        <h2>On the Bar</h2>
+        <p>A few things worth knowing next time you're behind it, or in front of it.</p>
+      </div>
+      <ul class="fact-ledger">
+        <li>
+          <span class="fact-title">The first cocktail, in print</span>
+          <span class="fact-leader"></span>
+          <span class="fact-note">In 1806, a New York paper defined the word as spirits, sugar, water, and bitters — the template every classic still follows.</span>
+        </li>
+        <li>
+          <span class="fact-title">Shake or stir?</span>
+          <span class="fact-leader"></span>
+          <span class="fact-note">Drinks with juice, egg, or cream get shaken for aeration. Spirit-only drinks get stirred, to stay silky and clear.</span>
+        </li>
+        <li>
+          <span class="fact-title">Dilution is the point</span>
+          <span class="fact-leader"></span>
+          <span class="fact-note">A well-mixed drink is roughly a fifth water by the time it's poured. That's what opens up the aroma.</span>
+        </li>
+        <li>
+          <span class="fact-title">The jigger</span>
+          <span class="fact-leader"></span>
+          <span class="fact-note">The hourglass-shaped double measure takes its name from an old British unit of about a glass and a half.</span>
+        </li>
+        <li>
+          <span class="fact-title">Bitters started as medicine</span>
+          <span class="fact-leader"></span>
+          <span class="fact-note">19th-century apothecaries sold bitters as a tonic, long before anyone realized a few dashes could fix a flat drink.</span>
+        </li>
+        <li>
+          <span class="fact-title">Vermouth is wine, not spirit</span>
+          <span class="fact-leader"></span>
+          <span class="fact-note">It's a fortified, aromatized wine. Treat an opened bottle like one — keep it in the fridge, use it within a month or so.</span>
+        </li>
+        <li>
+          <span class="fact-title">Why bartenders twist a peel</span>
+          <span class="fact-leader"></span>
+          <span class="fact-note">Expressing citrus oil over a glass changes the aroma of a drink more than the garnish changes how it looks.</span>
+        </li>
+        <li>
+          <span class="fact-title">Speakeasy</span>
+          <span class="fact-leader"></span>
+          <span class="fact-note">Prohibition-era patrons were told to speak easy, quietly, about the address. The name outlived the law.</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="menu">
+    <div class="container">
+      <div class="section-head">
+        <h2>The Menu</h2>
+        <p>Eight drinks worth learning properly. Master these and most of the rest of the bar is a variation on one of them.</p>
+      </div>
+
+      <div class="category">
+        <h3>Stirred &amp; spirited</h3>
+
+        <article class="recipe">
+          <div class="recipe-head">
+            <h4>Old Fashioned</h4>
+            <p class="recipe-glass">Rocks glass</p>
+          </div>
+          <p class="recipe-desc">Whiskey, sugar, bitters — the founding formula, barely changed since 1806.</p>
+          <div class="recipe-body">
+            <div class="ingredients">
+              <p class="col-label">Ingredients</p>
+              <ul>
+                <li>2 oz bourbon or rye</li>
+                <li>1 sugar cube (or 1/4 oz simple syrup)</li>
+                <li>2–3 dashes Angostura bitters</li>
+                <li>Orange peel, for garnish</li>
+              </ul>
+            </div>
+            <div class="method">
+              <p class="col-label">Method</p>
+              <ol>
+                <li>Muddle the sugar cube with bitters and a splash of water in the glass.</li>
+                <li>Add whiskey and one large ice cube.</li>
+                <li>Stir until well chilled, about 20 seconds.</li>
+                <li>Express the orange peel over the top and drop it in.</li>
+              </ol>
+            </div>
+          </div>
+        </article>
+
+        <article class="recipe">
+          <div class="recipe-head">
+            <h4>Negroni</h4>
+            <p class="recipe-glass">Rocks glass</p>
+          </div>
+          <p class="recipe-desc">Equal parts gin, Campari, and sweet vermouth. Bitter, bright, unmistakable.</p>
+          <div class="recipe-body">
+            <div class="ingredients">
+              <p class="col-label">Ingredients</p>
+              <ul>
+                <li>1 oz gin</li>
+                <li>1 oz Campari</li>
+                <li>1 oz sweet vermouth</li>
+                <li>Orange peel, for garnish</li>
+              </ul>
+            </div>
+            <div class="method">
+              <p class="col-label">Method</p>
+              <ol>
+                <li>Combine all ingredients in a mixing glass with ice.</li>
+                <li>Stir until well chilled, 20–30 seconds.</li>
+                <li>Strain over fresh ice into the glass.</li>
+                <li>Garnish with orange peel.</li>
+              </ol>
+            </div>
+          </div>
+        </article>
+
+        <article class="recipe">
+          <div class="recipe-head">
+            <h4>Manhattan</h4>
+            <p class="recipe-glass">Coupe</p>
+          </div>
+          <p class="recipe-desc">Rye and sweet vermouth, stirred cold and poured up. A steadying drink.</p>
+          <div class="recipe-body">
+            <div class="ingredients">
+              <p class="col-label">Ingredients</p>
+              <ul>
+                <li>2 oz rye whiskey</li>
+                <li>1 oz sweet vermouth</li>
+                <li>2 dashes Angostura bitters</li>
+                <li>Brandied cherry, for garnish</li>
+              </ul>
+            </div>
+            <div class="method">
+              <p class="col-label">Method</p>
+              <ol>
+                <li>Combine ingredients in a mixing glass with ice.</li>
+                <li>Stir until well chilled.</li>
+                <li>Strain into a chilled coupe.</li>
+                <li>Garnish with a cherry.</li>
+              </ol>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="category">
+        <h3>Shaken &amp; citrus-forward</h3>
+
+        <article class="recipe">
+          <div class="recipe-head">
+            <h4>Daiquiri</h4>
+            <p class="recipe-glass">Coupe</p>
+          </div>
+          <p class="recipe-desc">Rum, lime, sugar. Three ingredients, no room to hide a bad one.</p>
+          <div class="recipe-body">
+            <div class="ingredients">
+              <p class="col-label">Ingredients</p>
+              <ul>
+                <li>2 oz white rum</li>
+                <li>1 oz fresh lime juice</li>
+                <li>3/4 oz simple syrup</li>
+              </ul>
+            </div>
+            <div class="method">
+              <p class="col-label">Method</p>
+              <ol>
+                <li>Shake all ingredients hard with ice.</li>
+                <li>Double strain into a chilled coupe.</li>
+              </ol>
+            </div>
+          </div>
+        </article>
+
+        <article class="recipe">
+          <div class="recipe-head">
+            <h4>Whiskey Sour</h4>
+            <p class="recipe-glass">Rocks glass</p>
+          </div>
+          <p class="recipe-desc">Bourbon, lemon, sugar, and — if you're doing it properly — an egg white.</p>
+          <div class="recipe-body">
+            <div class="ingredients">
+              <p class="col-label">Ingredients</p>
+              <ul>
+                <li>2 oz bourbon</li>
+                <li>3/4 oz fresh lemon juice</li>
+                <li>3/4 oz simple syrup</li>
+                <li>1 egg white (optional)</li>
+                <li>Angostura bitters, for garnish</li>
+              </ul>
+            </div>
+            <div class="method">
+              <p class="col-label">Method</p>
+              <ol>
+                <li>If using egg white, shake all ingredients hard without ice first.</li>
+                <li>Add ice and shake again until well chilled.</li>
+                <li>Strain into the glass over fresh ice.</li>
+                <li>Finish with a few drops of bitters on the foam.</li>
+              </ol>
+            </div>
+          </div>
+        </article>
+
+        <article class="recipe">
+          <div class="recipe-head">
+            <h4>Margarita</h4>
+            <p class="recipe-glass">Rocks glass</p>
+          </div>
+          <p class="recipe-desc">Tequila, lime, orange liqueur. Salt the rim or don't — it's not the point.</p>
+          <div class="recipe-body">
+            <div class="ingredients">
+              <p class="col-label">Ingredients</p>
+              <ul>
+                <li>2 oz blanco tequila</li>
+                <li>1 oz fresh lime juice</li>
+                <li>3/4 oz orange liqueur</li>
+                <li>Salt, for the rim (optional)</li>
+              </ul>
+            </div>
+            <div class="method">
+              <p class="col-label">Method</p>
+              <ol>
+                <li>Rim the glass with salt, if using.</li>
+                <li>Shake all ingredients hard with ice.</li>
+                <li>Strain into the glass over fresh ice.</li>
+              </ol>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="category">
+        <h3>Tall &amp; refreshing</h3>
+
+        <article class="recipe">
+          <div class="recipe-head">
+            <h4>Mojito</h4>
+            <p class="recipe-glass">Highball</p>
+          </div>
+          <p class="recipe-desc">Rum, lime, mint, soda. Built to be drunk slowly in the heat.</p>
+          <div class="recipe-body">
+            <div class="ingredients">
+              <p class="col-label">Ingredients</p>
+              <ul>
+                <li>2 oz white rum</li>
+                <li>3/4 oz fresh lime juice</li>
+                <li>2 tsp sugar (or 1/2 oz simple syrup)</li>
+                <li>8–10 mint leaves</li>
+                <li>Soda water, to top</li>
+              </ul>
+            </div>
+            <div class="method">
+              <p class="col-label">Method</p>
+              <ol>
+                <li>Gently muddle mint with sugar and lime juice in the glass.</li>
+                <li>Fill with crushed ice, add rum, and stir.</li>
+                <li>Top with soda water and stir once more.</li>
+                <li>Garnish with a mint sprig.</li>
+              </ol>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="category">
+        <h3>After dinner</h3>
+
+        <article class="recipe">
+          <div class="recipe-head">
+            <h4>Espresso Martini</h4>
+            <p class="recipe-glass">Coupe</p>
+          </div>
+          <p class="recipe-desc">Vodka, espresso, coffee liqueur, shaken until it forms its own foam.</p>
+          <div class="recipe-body">
+            <div class="ingredients">
+              <p class="col-label">Ingredients</p>
+              <ul>
+                <li>2 oz vodka</li>
+                <li>1 oz fresh espresso, cooled</li>
+                <li>1/2 oz coffee liqueur</li>
+                <li>3 coffee beans, for garnish</li>
+              </ul>
+            </div>
+            <div class="method">
+              <p class="col-label">Method</p>
+              <ol>
+                <li>Shake all ingredients vigorously with plenty of ice.</li>
+                <li>Double strain into a chilled coupe.</li>
+                <li>Garnish with three coffee beans.</li>
+              </ol>
+            </div>
+          </div>
+        </article>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <hr class="rule">
+  <div class="container">
+    <p>Proof &amp; Measure — a field guide to the bar.</p>
+    <p>Drink well, drink slowly, and know when to stop.</p>
+  </div>
+</footer>
+
+</body>
+</html>
