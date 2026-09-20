@@ -305,6 +305,36 @@
     margin: 0.3rem 0;
   }
 
+  /* ---------- Shuffle ---------- */
+
+  .shuffle-btn{
+    margin-top: var(--space-3);
+    padding: 0.55rem 1.1rem;
+    background: transparent;
+    border: 1px solid var(--color-rule);
+    border-radius: 3px;
+    color: var(--color-brass);
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: border-color 0.2s ease, color 0.2s ease;
+  }
+  .shuffle-btn:hover{
+    border-color: var(--color-brass);
+    color: var(--color-ivory);
+  }
+
+  .fade-swap{
+    animation: fadeSwap 0.35s ease;
+  }
+  @keyframes fadeSwap{
+    from{ opacity: 0; }
+    to{ opacity: 1; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .fade-swap{ animation: none; }
+  }
+
   /* ---------- Music toggle ---------- */
 
   .music-toggle{
@@ -363,6 +393,7 @@
     <a class="brand" href="#top">Proof &amp; Measure</a>
     <nav class="site-nav">
       <a href="#facts">On the Bar</a>
+      <a href="#pour">Tonight's Pour</a>
       <a href="#menu">The Menu</a>
     </nav>
   </div>
@@ -382,6 +413,7 @@
       </svg>
       <h1>A field guide to the bar</h1>
       <p>Facts worth knowing before your next round, and a short menu of drinks worth making well.</p>
+      <button id="shuffle-btn" class="shuffle-btn" type="button">🎲 Shuffle the bar</button>
     </div>
   </section>
 
@@ -389,50 +421,19 @@
     <div class="container">
       <div class="section-head">
         <h2>On the Bar</h2>
-        <p>A few things worth knowing next time you're behind it, or in front of it.</p>
+        <p>A few things worth knowing next time you're behind it, or in front of it — a different set each time you drop by.</p>
       </div>
-      <ul class="fact-ledger">
-        <li>
-          <span class="fact-title">The first cocktail, in print</span>
-          <span class="fact-leader"></span>
-          <span class="fact-note">In 1806, a New York paper defined the word as spirits, sugar, water, and bitters — the template every classic still follows.</span>
-        </li>
-        <li>
-          <span class="fact-title">Shake or stir?</span>
-          <span class="fact-leader"></span>
-          <span class="fact-note">Drinks with juice, egg, or cream get shaken for aeration. Spirit-only drinks get stirred, to stay silky and clear.</span>
-        </li>
-        <li>
-          <span class="fact-title">Dilution is the point</span>
-          <span class="fact-leader"></span>
-          <span class="fact-note">A well-mixed drink is roughly a fifth water by the time it's poured. That's what opens up the aroma.</span>
-        </li>
-        <li>
-          <span class="fact-title">The jigger</span>
-          <span class="fact-leader"></span>
-          <span class="fact-note">The hourglass-shaped double measure takes its name from an old British unit of about a glass and a half.</span>
-        </li>
-        <li>
-          <span class="fact-title">Bitters started as medicine</span>
-          <span class="fact-leader"></span>
-          <span class="fact-note">19th-century apothecaries sold bitters as a tonic, long before anyone realized a few dashes could fix a flat drink.</span>
-        </li>
-        <li>
-          <span class="fact-title">Vermouth is wine, not spirit</span>
-          <span class="fact-leader"></span>
-          <span class="fact-note">It's a fortified, aromatized wine. Treat an opened bottle like one — keep it in the fridge, use it within a month or so.</span>
-        </li>
-        <li>
-          <span class="fact-title">Why bartenders twist a peel</span>
-          <span class="fact-leader"></span>
-          <span class="fact-note">Expressing citrus oil over a glass changes the aroma of a drink more than the garnish changes how it looks.</span>
-        </li>
-        <li>
-          <span class="fact-title">Speakeasy</span>
-          <span class="fact-leader"></span>
-          <span class="fact-note">Prohibition-era patrons were told to speak easy, quietly, about the address. The name outlived the law.</span>
-        </li>
-      </ul>
+      <ul class="fact-ledger" id="fact-ledger"></ul>
+    </div>
+  </section>
+
+  <section id="pour">
+    <div class="container">
+      <div class="section-head">
+        <h2>Tonight's Pour</h2>
+        <p>A few drinks outside the core list, picked fresh on every visit. Worth learning too, once you've got the classics down.</p>
+      </div>
+      <div class="category" id="wildcard-recipes"></div>
     </div>
   </section>
 
@@ -440,7 +441,7 @@
     <div class="container">
       <div class="section-head">
         <h2>The Menu</h2>
-        <p>Eight drinks worth learning properly. Master these and most of the rest of the bar is a variation on one of them.</p>
+        <p>Eight drinks worth learning properly. Master these and most of the rest of the bar is a variation on one of them. These eight stay put — no shuffling here.</p>
       </div>
 
       <div class="category">
@@ -705,6 +706,93 @@
 <audio id="bg-audio" loop preload="none">
   <source src="audio/Ocean%20Eyes%20-%20Hannah%20Gracelynn.mp3" type="audio/mpeg">
 </audio>
+
+<script>
+  (function(){
+    var FACTS = [
+      { title: "The first cocktail, in print", note: "In 1806, a New York paper defined the word as spirits, sugar, water, and bitters — the template every classic still follows." },
+      { title: "Shake or stir?", note: "Drinks with juice, egg, or cream get shaken for aeration. Spirit-only drinks get stirred, to stay silky and clear." },
+      { title: "Dilution is the point", note: "A well-mixed drink is roughly a fifth water by the time it's poured. That's what opens up the aroma." },
+      { title: "The jigger", note: "The hourglass-shaped double measure takes its name from an old British unit of about a glass and a half." },
+      { title: "Bitters started as medicine", note: "19th-century apothecaries sold bitters as a tonic, long before anyone realized a few dashes could fix a flat drink." },
+      { title: "Vermouth is wine, not spirit", note: "It's a fortified, aromatized wine. Treat an opened bottle like one — keep it in the fridge, use it within a month or so." },
+      { title: "Why bartenders twist a peel", note: "Expressing citrus oil over a glass changes the aroma of a drink more than the garnish changes how it looks." },
+      { title: "Speakeasy", note: "Prohibition-era patrons were told to speak easy, quietly, about the address. The name outlived the law." },
+      { title: "The three-ingredient rule", note: "Most enduring cocktails follow one formula: a base spirit, something sweet, and something sour or bitter to balance it." },
+      { title: "Egg white isn't about flavor", note: "It's there for texture — shaken hard, it builds a silky foam on a sour without changing the taste much at all." },
+      { title: "Simple syrup beats granulated sugar", note: "A 1:1 sugar-water syrup blends into a cold drink instantly, where dry sugar just sinks and sits." },
+      { title: "The rickey skips sugar entirely", note: "One of the oldest highball styles, the rickey is just spirit, lime, and soda — no sweetener at all." },
+      { title: "Absinthe's reputation was mostly myth", note: "Its 19th-century hallucinogenic reputation is now thought to be exaggerated — the real effect was just the high alcohol content." },
+      { title: "A \"dash\" isn't exact", note: "It generally means one quick flick of the bitters bottle — somewhere near 1/32 of an ounce, give or take." },
+      { title: "The Sazerac may be America's oldest cocktail", note: "New Orleans bartenders were serving a version of it with cognac and absinthe as early as the 1830s." },
+      { title: "Ice dilutes slower when it's dense", note: "Large-format cubes and spheres melt slower than crushed ice, which is why a good Old Fashioned uses one big cube, not several small ones." }
+    ];
+
+    var WILDCARD_RECIPES = [
+      { name: "Paper Plane", glass: "Coupe", desc: "Equal parts bourbon and three bittersweet liqueurs — a modern classic built like a sour with no citrus.", ingredients: ["3/4 oz bourbon", "3/4 oz Aperol", "3/4 oz Amaro Nonino", "3/4 oz fresh lemon juice"], method: ["Shake all ingredients hard with ice.", "Double strain into a chilled coupe."] },
+      { name: "Last Word", glass: "Coupe", desc: "Gin, herbal Chartreuse, maraschino, and lime in equal parts — a Prohibition-era drink revived decades later.", ingredients: ["3/4 oz gin", "3/4 oz green Chartreuse", "3/4 oz maraschino liqueur", "3/4 oz fresh lime juice"], method: ["Shake all ingredients hard with ice.", "Strain into a chilled coupe."] },
+      { name: "Brown Derby", glass: "Coupe", desc: "Bourbon, grapefruit, and honey — a Prohibition-era Hollywood classic, bittersweet and bright.", ingredients: ["2 oz bourbon", "3/4 oz fresh grapefruit juice", "1/2 oz honey syrup"], method: ["Shake all ingredients hard with ice.", "Strain into a chilled coupe."] },
+      { name: "Paloma", glass: "Highball", desc: "Tequila and grapefruit, tall and fizzy — more popular in Mexico than the Margarita itself.", ingredients: ["2 oz blanco tequila", "1/2 oz fresh lime juice", "Grapefruit soda, to top", "Salt, for the rim (optional)"], method: ["Rim a highball glass with salt, if using, and fill with ice.", "Add tequila and lime juice.", "Top with grapefruit soda and stir gently."] },
+      { name: "Aviation", glass: "Coupe", desc: "Gin, maraschino, and lemon, with a whisper of violette for color and floral lift.", ingredients: ["2 oz gin", "1/2 oz maraschino liqueur", "1/2 oz fresh lemon juice", "1/4 oz crème de violette"], method: ["Shake all ingredients hard with ice.", "Strain into a chilled coupe."] },
+      { name: "Corpse Reviver No. 2", glass: "Coupe", desc: "Gin, orange liqueur, Lillet, and lemon, with a rinse of absinthe — built as a hangover cure.", ingredients: ["3/4 oz gin", "3/4 oz orange liqueur", "3/4 oz Lillet Blanc", "3/4 oz fresh lemon juice", "1 dash absinthe"], method: ["Rinse a chilled coupe with absinthe and discard the excess.", "Shake the remaining ingredients hard with ice.", "Strain into the glass."] },
+      { name: "Sazerac", glass: "Rocks glass, no ice", desc: "Rye, sugar, and Peychaud's bitters in an absinthe-rinsed glass — no ice in the glass, ever.", ingredients: ["2 oz rye whiskey", "1 sugar cube (or 1/4 oz simple syrup)", "3 dashes Peychaud's bitters", "1 dash absinthe", "Lemon peel, for garnish"], method: ["Rinse a chilled rocks glass with absinthe and discard the excess.", "In a mixing glass, muddle the sugar cube with bitters, add rye, and stir with ice until well chilled.", "Strain into the prepared glass.", "Express the lemon peel over the top and discard it."] },
+      { name: "Boulevardier", glass: "Rocks glass", desc: "A Negroni's whiskey-forward cousin — bourbon standing in for gin against the same Campari and sweet vermouth.", ingredients: ["1 1/2 oz bourbon", "1 oz Campari", "1 oz sweet vermouth", "Orange peel, for garnish"], method: ["Combine all ingredients in a mixing glass with ice.", "Stir until well chilled.", "Strain over fresh ice.", "Garnish with orange peel."] },
+      { name: "Pisco Sour", glass: "Coupe", desc: "Peru's national drink — pisco and lime shaken with egg white until it forms a thick, silky foam.", ingredients: ["2 oz pisco", "3/4 oz fresh lime juice", "3/4 oz simple syrup", "1 egg white", "Angostura bitters, for garnish"], method: ["Dry shake all ingredients without ice.", "Add ice and shake again until well chilled.", "Strain into a chilled coupe.", "Finish with a few drops of bitters on the foam."] },
+      { name: "Gimlet", glass: "Coupe", desc: "Gin and lime, sharp and simple — originally mixed with cordial to fight scurvy on British ships.", ingredients: ["2 oz gin", "3/4 oz fresh lime juice", "1/2 oz simple syrup"], method: ["Shake all ingredients hard with ice.", "Strain into a chilled coupe."] }
+    ];
+
+    function pickRandom(arr, n){
+      var pool = arr.slice();
+      var picked = [];
+      while (picked.length < n && pool.length){
+        var i = Math.floor(Math.random() * pool.length);
+        picked.push(pool.splice(i, 1)[0]);
+      }
+      return picked;
+    }
+
+    function renderFacts(){
+      var ledger = document.getElementById('fact-ledger');
+      var chosen = pickRandom(FACTS, 5);
+      ledger.innerHTML = chosen.map(function(f){
+        return '<li><span class="fact-title">' + f.title + '</span>' +
+               '<span class="fact-leader"></span>' +
+               '<span class="fact-note">' + f.note + '</span></li>';
+      }).join('');
+      ledger.classList.remove('fade-swap');
+      void ledger.offsetWidth;
+      ledger.classList.add('fade-swap');
+    }
+
+    function renderWildcardRecipes(){
+      var container = document.getElementById('wildcard-recipes');
+      var chosen = pickRandom(WILDCARD_RECIPES, 3);
+      container.innerHTML = chosen.map(function(r){
+        var ingredients = r.ingredients.map(function(i){ return '<li>' + i + '</li>'; }).join('');
+        var method = r.method.map(function(m){ return '<li>' + m + '</li>'; }).join('');
+        return '<article class="recipe">' +
+                 '<div class="recipe-head"><h4>' + r.name + '</h4><p class="recipe-glass">' + r.glass + '</p></div>' +
+                 '<p class="recipe-desc">' + r.desc + '</p>' +
+                 '<div class="recipe-body">' +
+                   '<div class="ingredients"><p class="col-label">Ingredients</p><ul>' + ingredients + '</ul></div>' +
+                   '<div class="method"><p class="col-label">Method</p><ol>' + method + '</ol></div>' +
+                 '</div>' +
+               '</article>';
+      }).join('');
+      container.classList.remove('fade-swap');
+      void container.offsetWidth;
+      container.classList.add('fade-swap');
+    }
+
+    function shuffleAll(){
+      renderFacts();
+      renderWildcardRecipes();
+    }
+
+    document.addEventListener('DOMContentLoaded', shuffleAll);
+    document.getElementById('shuffle-btn').addEventListener('click', shuffleAll);
+  })();
+</script>
 
 <script>
   (function(){
